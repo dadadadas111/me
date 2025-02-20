@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typewriter Effect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #typewriter {
+            font-size: 2em;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid black;
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+    </style>
+</head>
+<body>
+    <div id="typewriter"></div>
+
+    <script>
+        const phrases = ["I am ABC", "I am Developer", "I am something..."];
+        let currentPhrase = 0;
+        let currentIndex = 0;
+        const typewriterElement = document.getElementById("typewriter");
+
+        function typeText() {
+            const currentText = phrases[currentPhrase];
+            if (currentIndex < currentText.length) {
+                typewriterElement.textContent += currentText.charAt(currentIndex);
+                currentIndex++;
+                setTimeout(typeText, 100);
+            } else {
+                setTimeout(deleteText, 1000);
+            }
+        }
+
+        function deleteText() {
+            if (currentIndex > 0) {
+                typewriterElement.textContent = typewriterElement.textContent.slice(0, -1);
+                currentIndex--;
+                setTimeout(deleteText, 50);
+            } else {
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                setTimeout(typeText, 500);
+            }
+        }
+
+        typeText();
+    </script>
+</body>
+</html>
