@@ -17,7 +17,7 @@ function typeText() {
         currentIndex++;
         setTimeout(typeText, 100);
     } else {
-        setTimeout(deleteText, 1000);
+        setTimeout(deleteText, 1500);
     }
 }
 
@@ -32,4 +32,7 @@ function deleteText() {
     }
 }
 
-typeText();
+typewriterElement.textContent = phrases[0];
+currentIndex = phrases[0].length;
+
+setTimeout(typeText, 1500);
